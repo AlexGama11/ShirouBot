@@ -1,2 +1,2 @@
-Worker: node --deploy.js
-Worker: node .
+Update: node --deploy.js
+Run: node .
