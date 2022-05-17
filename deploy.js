@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { clientId, guildId, token } = require(process.env.clientId, process.env.guildId, process.env.token);
+//const { clientId, guildId, token } = require(process.env.clientId, process.env.guildId, process.env.token);
 
 let staging = process.argv.includes("--staging");
 let reset = process.argv.includes("--reset");
