@@ -1,5 +1,5 @@
 {
-  "name": "rei",
+  "name": "Shirou",
   "version": "1.0.0",
   "description": "These are the files for my discord bot.\r If you wish to use the code just remember to switch the token on theconfig file.\r For instructions on how to use it here's the guide:\r 1. Download ffmpeg.\r 2. Open node.js and go to the bot directory and type:\r npm install discord.js --save\r then type:\r npm install npm install ytdl-core --save\r to launch type:\r node .\r and you're done.",
   "main": "app.js",

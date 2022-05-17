@@ -1,6 +1,6 @@
 ﻿const fs = require('fs');
 const { Client, Collection, Intents} = require("discord.js");
-const { token } = require('./config.json');
+const { token } = require(process.env);
 const client = new Client({ partials: ["CHANNEL"], intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.commands = new Collection();
