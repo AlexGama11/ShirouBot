@@ -1,0 +1,30 @@
+{
+  "name": "rei",
+  "version": "1.0.0",
+  "description": "These are the files for my discord bot.\r If you wish to use the code just remember to switch the token on theconfig file.\r For instructions on how to use it here's the guide:\r 1. Download ffmpeg.\r 2. Open node.js and go to the bot directory and type:\r npm install discord.js --save\r then type:\r npm install npm install ytdl-core --save\r to launch type:\r node .\r and you're done.",
+  "main": "app.js",
+  "scripts": {
+    "deploy": "node deploy.js",
+    "deploy-staging": "node deploy.js --staging",
+    "reset": "node deploy.js --reset"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexGama11/Rei.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexGama11/Rei/issues"
+  },
+  "homepage": "https://github.com/AlexGama11/Rei#readme",
+  "dependencies": {
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "axios": "^0.24.0",
+    "discord-api-types": "^0.25.2",
+    "discord.js": "^13.7.0",
+    "dist": "^0.1.2",
+    "i": "^0.3.7",
+    "uglify-js": "^3.14.4"
+  }
+}
