@@ -1,6 +1,6 @@
 ﻿const fs = require('fs');
 const { Client, Collection, Intents} = require("discord.js");
-//const { token } = require(process.env.token);
+const { token } = require('./config.json');
 const client = new Client({ partials: ["CHANNEL"], intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.commands = new Collection();
@@ -16,7 +16,8 @@ for (const file of commandFiles)
 client.on("ready", () =>
 {
 	console.log(`Let's go, Tohsaka!`); 
-  client.user.setActivity(`Use /help to get a list of commands`);
+	client.user.setActivity('You from within your walls', { type: 'Watching' });
+	client.user.setStatus('online');
 });
 
 

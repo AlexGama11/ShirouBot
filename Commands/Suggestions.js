@@ -11,6 +11,7 @@ module.exports =
         //const guild = interaction.client.guilds.fetch("900521414933757983");
         const string = interaction.options.getString('message');
         const alex = await interaction.client.users.fetch('224258146078556160');
+        const attachment = interaction.options.getAttachment('attachment');
         let avatar = interaction.member.displayAvatarURL({ dynamic: true, size: 1024 });
 
         if (!string) {
@@ -26,7 +27,17 @@ module.exports =
                 .setFooter(`${interaction.user.username} sent a suggestion`, avatar, true)
                 .setTimestamp()
 
-            await alex.send(`${interaction.user.username} sent a suggestion: ${string}`);
+            if (!attachment)
+            {
+                await alex.send(`${interaction.user.username} sent a suggestion: ${string}`);
+            }
+
+            else
+            {
+                await alex.send(`${interaction.user.username} sent a suggestion: ${string} ` + attachment.attachment);
+
+                console.log(attachment.url)
+            }
 
             await interaction.reply({ ephemeral: true, embeds: [avatarEmbed] });
         }
@@ -36,5 +47,6 @@ module.exports =
     data: new SlashCommandBuilder()
         .setName('suggestions')
         .setDescription('Send a suggestion to Alex!')
-       .addStringOption(option => option.setName('message').setDescription('Enter your message!'))
+        .addStringOption(option => option.setName('message').setDescription('Enter your message!').setRequired(true))
+        .addAttachmentOption(option => option.setName('attachment').setDescription('Add an attachment'))
 };

@@ -10,6 +10,7 @@ module.exports =
 
         const string = interaction.options.getString('message');
         const channel = interaction.client.channels.cache.get('951531506562650134');
+        const attachment = interaction.options.getAttachment('attachment');
         let avatar = interaction.member.displayAvatarURL({ dynamic: true, size: 1024 });
 
         if (!string) {
@@ -25,7 +26,17 @@ module.exports =
                 .setFooter(`${interaction.user.username} sent modmail`, avatar, true)
                 .setTimestamp()
 
-            await channel.send(`${interaction.user.username} sent a modmail: ${string}`);
+            if (!attachment)
+            {
+                await channel.send(`${interaction.user.username} sent a modmail: ${string}`);
+            }
+
+            else
+            {
+                await channel.send(`${interaction.user.username} sent a modmail: ${string} ` + attachment.attachment);
+
+                console.log(attachment.url)
+            }
 
             await interaction.reply({ ephemeral: true, embeds: [avatarEmbed] });
         }
@@ -35,5 +46,6 @@ module.exports =
     data: new SlashCommandBuilder()
         .setName('modmail')
         .setDescription('Send a message to the mods!')
-       .addStringOption(option => option.setName('message').setDescription('Enter your message!'))
+        .addStringOption(option => option.setName('message').setDescription('Enter your message!').setRequired(true))
+        .addAttachmentOption(option => option.setName('attachment').setDescription('Add an attachment'))
 };
