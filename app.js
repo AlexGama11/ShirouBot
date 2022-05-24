@@ -16,7 +16,7 @@ for (const file of commandFiles)
 client.on("ready", () =>
 {
 	console.log(`Let's go, Tohsaka!`); 
-	client.user.setActivity('You from within your walls', { type: 'Watching' });
+	client.user.setActivity('You from within your walls', { type: 'WATCHING' });
 	client.user.setStatus('online');
 });
 

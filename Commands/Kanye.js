@@ -29,13 +29,14 @@ module.exports =
 				.setStyle('PRIMARY'),
 		)
 
-		await interaction.reply({ ephemeral: true, embeds: [kanyeEmbed], components: [kanye] });
+		await interaction.reply({ ephemeral: false, embeds: [kanyeEmbed], components: [kanye] });
 
-		const filter = i => i.user.id === interaction.user.id;
+        //const filter = i => i.user.id === interaction.user.id;
 
-		const collector = interaction.channel.createMessageComponentCollector({ filter, time: 60000 });
+        const collector = interaction.channel.createMessageComponentCollector({ /*filter, */time: 60000 });
 
 		collector.on('collect', async i => {
+			i.deferUpdate();
 
 			switch (i.customId)
 			{

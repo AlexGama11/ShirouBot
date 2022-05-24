@@ -8,7 +8,15 @@ module.exports =
 {
     async execute(interaction) {
 
-        if (interaction.user.id === '224258146078556160' || interaction.user.id === '288305821090316288' || interaction.user.id == '454051127013670913'  || interaction.user.id == '663237770105585701') {
+        const users = [
+            `224258146078556160`,
+            `288305821090316288`,
+            `454051127013670913`,
+            `663237770105585701`,
+            `559675617503739904`
+        ]
+
+        if (users.includes(interaction.user.id)) {
         const string = interaction.options.getString('message');
         const channel = interaction.options.getChannel('channel');
         const attachment = interaction.options.getAttachment('attachment');
@@ -43,6 +51,11 @@ module.exports =
             await interaction.reply({ ephemeral: true, embeds: [avatarEmbed] });
         }
 
+    }
+
+    else if (interaction.user.id === `203919579561459712`)
+    {
+        interaction.reply({ ephemeral: false, content: `Lmao <@203919579561459712> you dumbass you cant use the bot!`});
     }
 
     else
