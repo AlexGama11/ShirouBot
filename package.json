@@ -26,5 +26,9 @@
     "dist": "^0.1.2",
     "i": "^0.3.7",
     "uglify-js": "^3.14.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.16.0",
+    "eslint-config-google": "^0.14.0"
   }
 }

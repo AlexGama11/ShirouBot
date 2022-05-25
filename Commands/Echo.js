@@ -1,74 +1,69 @@
+/* eslint-disable no-unused-vars */
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require("discord.js");
-const { Client, Collection, Intents, TextChannel } = require("discord.js");
+const { MessageEmbed } = require('discord.js');
+const { Client, Collection, Intents, TextChannel } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const wait = require('util').promisify(setTimeout);
 
 module.exports =
 {
-    async execute(interaction) {
+	async execute(interaction) {
+		const users = [
+			'224258146078556160',
+			'288305821090316288',
+			'454051127013670913',
+			'663237770105585701',
+			'559675617503739904',
+			'413894851872948226',
+		];
 
-        const users = [
-            `224258146078556160`,
-            `288305821090316288`,
-            `454051127013670913`,
-            `663237770105585701`,
-            `559675617503739904`
-        ]
+		if (users.includes(interaction.user.id)) {
+			const string = interaction.options.getString('message');
+			const channel = interaction.options.getChannel('channel');
+			const attachment = interaction.options.getAttachment('attachment');
+			// const channel = interaction.client.channels.cache.get('900521416020074537');
+			const avatar = interaction.member.displayAvatarURL({ dynamic: true, size: 1024 });
 
-        if (users.includes(interaction.user.id)) {
-        const string = interaction.options.getString('message');
-        const channel = interaction.options.getChannel('channel');
-        const attachment = interaction.options.getAttachment('attachment');
-        //const channel = interaction.client.channels.cache.get('900521416020074537');
-        let avatar = interaction.member.displayAvatarURL({ dynamic: true, size: 1024 });
+			if (!string) {
+				interaction.reply({ ephemeral: true, content: 'You need to add a message!' });
+			}
 
-        if (!string) {
-            interaction.reply({ ephemeral: true, content: 'You need to add a message!' });
-        }
+			else {
+				const avatarEmbed = new MessageEmbed()
+					.setColor('#6600ff')
+					.setTitle('Echo')
+					.setDescription('Thank your for your message!')
+					.setThumbnail('https://cdn.discordapp.com/attachments/736236169293070396/975810146112524388/unknown.png?size=4096')
+					.setFooter(`${interaction.user.username} sent a message`, avatar, true)
+					.setTimestamp();
 
-        else {
-            const avatarEmbed = new MessageEmbed()
-                .setColor('#6600ff')
-                .setTitle(`Echo`)
-                .setDescription('Thank your for your message!')
-                .setThumbnail('https://cdn.discordapp.com/attachments/736236169293070396/975810146112524388/unknown.png?size=4096')
-                .setFooter(`${interaction.user.username} sent a message`, avatar, true)
-                .setTimestamp()
+				if (!attachment) {
+					await channel.send(string);
+				}
 
-                if (!attachment)
-                {
-                    await channel.send(string);
-                }
+				else {
+					await channel.send(`${string} ` + attachment.attachment);
 
-                else
-                {
-                    await channel.send(`${string} ` + attachment.attachment);
+					console.log(attachment.url);
+				}
 
-                    console.log(attachment.url)
-                }
+				await interaction.reply({ ephemeral: true, embeds: [avatarEmbed] });
+			}
+		}
 
-            await interaction.reply({ ephemeral: true, embeds: [avatarEmbed] });
-        }
+		else if (interaction.user.id === '203919579561459712') {
+			interaction.reply({ ephemeral: false, content: 'Lmao <@203919579561459712> you dumbass you cant use the bot!' });
+		}
 
-    }
+		else {
+			interaction.reply({ ephemeral: true, content: 'You can\'t use this command!' });
+		}
+	},
 
-    else if (interaction.user.id === `203919579561459712`)
-    {
-        interaction.reply({ ephemeral: false, content: `Lmao <@203919579561459712> you dumbass you cant use the bot!`});
-    }
-
-    else
-    {
-        interaction.reply({ ephemeral: true, content: `You can't use this command!`});
-    }
-
-    },
-
-    data: new SlashCommandBuilder()
-        .setName('echo')
-        .setDescription('Echo a message!')
-        .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true))
-        .addStringOption(option => option.setName('message').setDescription('Enter your message!').setRequired(true))
-        .addAttachmentOption(option => option.setName('attachment').setDescription('Add an attachment'))
+	data: new SlashCommandBuilder()
+		.setName('echo')
+		.setDescription('Echo a message!')
+		.addChannelOption((option) => option.setName('channel').setDescription('Select a channel').setRequired(true))
+		.addStringOption((option) => option.setName('message').setDescription('Enter your message!').setRequired(true))
+		.addAttachmentOption((option) => option.setName('attachment').setDescription('Add an attachment')),
 };
