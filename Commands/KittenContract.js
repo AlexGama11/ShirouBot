@@ -1,17 +1,20 @@
-/* eslint-disable no-inline-comments */
-/* eslint-disable no-unused-vars */
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, Interaction, GuildMemberRoleManager, MessageActionRow, MessageButton } = require('discord.js');
 const { Client, Collection, Intents, TextChannel } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const wait = require('util').promisify(setTimeout);
+const fs = require('fs');
 
 module.exports =
 {
 	async execute(interaction) {
 		const user = interaction.options.getUser('kitten');
 		const cc = interaction.user.id;
+		const ccName = interaction.user.username;
 		const kitten = user.id;
+		const kittenName = user.username;
+
+		let contractNumber = 0;
 
 		let today = new Date();
 		const dd = String(today.getDate()).padStart(2, '0');
@@ -86,6 +89,48 @@ Payment in the source of one $5 Nitro per month will be given as long as the Kit
 
 					if (i.user.id === kitten) {
 						await interaction.editReply({ content: signedcontract });
+						contractNumber++;
+
+						let contractName = 'Contract ' + ccName + ' - ' + kittenName + ' (' + contractNumber + ')' + '.txt';
+
+						if (fs.existsSync(`./${contractName}`)) {
+
+						while (fs.existsSync(`./${contractName}`))
+						{
+							contractNumber++
+							let contractName = 'Contract ' + ccName + ' - ' + kittenName + ' (' + contractNumber + ')' + '.txt';
+
+							if (!fs.existsSync(`./${contractName}`)) {
+
+							fs.appendFile(contractName,signedcontract, err => {
+								if (err) {
+								  console.error(err)
+								  return
+								}
+							})
+
+							await interaction.followUp({ content: `Your contract has been logged to ${contractName}. Ask <@${224258146078556160}> (AlexMango#6583) for the log!` });
+
+							collector.on('end', (collected) => console.log(`Collected ${collected.size} items`));
+
+							break;
+						}
+						}
+						}
+					
+						else {
+							fs.appendFile(contractName,signedcontract, err => {
+								if (err) {
+								  console.error(err)
+								  return
+								}
+							})
+
+							await interaction.followUp({ content: `Your contract has been logged to ${contractName}. Ask <@${224258146078556160}> (AlexMango#6583) for the log!` });
+
+							collector.on('end', (collected) => console.log(`Collected ${collected.size} items`));
+
+						}
 					}
 
 					else {

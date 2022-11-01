@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { clientId, guildId, token } = require('./config.json');
+const dotenv = require('dotenv').config();
 
 const staging = process.argv.includes('--staging');
 const reset = process.argv.includes('--reset');
@@ -16,7 +16,7 @@ if (!reset) {
 	}
 }
 
-const rest = new REST({ version: '9' }).setToken(token);
+const rest = new REST({ version: '9' }).setToken(process.env.token);
 
 (async () => {
 	try {
@@ -24,7 +24,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 			if (staging) {
 				await rest.put
 				(
-					Routes.applicationGuildCommands(clientId, guildId),
+					Routes.applicationGuildCommands(process.env.clientId, process.env.guildId),
 					{ body: commands },
 				);
 
@@ -33,7 +33,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 			else {
 				await rest.put
 				(
-					Routes.applicationCommands(clientId),
+					Routes.applicationCommands(process.env.clientId),
 					{ body: commands },
 				);
 
@@ -43,13 +43,13 @@ const rest = new REST({ version: '9' }).setToken(token);
 		else {
 			await rest.put
 			(
-				Routes.applicationGuildCommands(clientId, guildId),
+				Routes.applicationGuildCommands(process.env.clientId, process.env.guildId),
 				{ body: commands },
 			);
 
 			await rest.put
 			(
-				Routes.applicationCommands(clientId),
+				Routes.applicationCommands(process.env.clientId),
 				{ body: commands },
 			);
 

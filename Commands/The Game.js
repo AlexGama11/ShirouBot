@@ -4,10 +4,13 @@ const { Client, Collection, Intents, TextChannel } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const wait = require('util').promisify(setTimeout);
 const cooldown = new Set();
+const dotenv = require('dotenv').config();
 
 module.exports =
 {
 	async execute(interaction) {
+
+		if (interaction.guild.id == '900521414933757983') {
 		const cooldownTime = 172800000;
 
 		if (cooldown.has(interaction.user)) {
@@ -39,6 +42,11 @@ module.exports =
 			setTimeout(() => {cooldown.delete(interaction.user);}, cooldownTime);
 
 			console.log(cooldown, cooldownTime);
+		}
+	}
+
+	else {
+			await interaction.reply({ ephemeral: true, content: `This command is disabled on this server! Ask <@${224258146078556160}> (AlexMango#6583) to add it here!` });
 		}
 	},
 
