@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { isInteractionButton } = require('discord-api-types/utils/v9');
 const { MessageEmbed } = require('discord.js');
 const { Client, Collection, Intents, TextChannel } = require('discord.js');
 const client = new Client({ partials: ['CHANNEL'], intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES] });
@@ -13,17 +14,24 @@ module.exports =
 		const attachment = interaction.options.getAttachment('attachment');
 		const avatar = interaction.member.displayAvatarURL({ dynamic: true, size: 1024 });
 
-		if (!string) {
-			interaction.reply({ ephemeral: true, content: 'You need to write a message!' });
-		}
+		const titleLocales = {
+			"pt-BR": 'Sugestão',
+		};
 
-		else {
+		const descriptionLocales = {
+			"pt-BR": `Obrigado pela tua sugestão, o Alex vai rever quando puder!`,
+		};
+
+		const footerLocales = {
+			"pt-BR": `${interaction.user.username} mandou uma sugestão`,
+		};
+
 			const avatarEmbed = new MessageEmbed()
 				.setColor('#6600ff')
-				.setTitle('Suggestion')
-				.setDescription('Thank your for your suggestion, Alex will review it when he can!')
+				.setTitle(titleLocales[interaction.locale] ?? 'Suggestion')
+				.setDescription(descriptionLocales[interaction.locale] ?? 'Thank your for your suggestion, Alex will review it when he can!')
 				.setThumbnail('https://cdn.discordapp.com/attachments/736236169293070396/975810146112524388/unknown.png?size=4096')
-				.setFooter(`${interaction.user.username} sent a suggestion`, avatar, true)
+				.setFooter({text: footerLocales[interaction.locale] ?? `${interaction.user.username} sent a suggestion`, iconURL: avatar})
 				.setTimestamp();
 
 			if (!attachment) {
@@ -37,12 +45,12 @@ module.exports =
 			}
 
 			await interaction.reply({ ephemeral: true, embeds: [avatarEmbed] });
-		}
+		
 	},
 
 	data: new SlashCommandBuilder()
-		.setName('suggestions')
-		.setDescription('Send a suggestion to Alex!')
-		.addStringOption((option) => option.setName('message').setDescription('Enter your message!').setRequired(true))
-		.addAttachmentOption((option) => option.setName('attachment').setDescription('Add an attachment')),
+		.setName('suggestions').setNameLocalizations({ "pt-BR": 'sugestão', })
+		.setDescription('Send a suggestion to Alex!').setDescriptionLocalizations({ "pt-BR": 'Manda uma sugestão ao Alex!', })
+		.addStringOption((option) => option.setName('message').setNameLocalizations({ "pt-BR": 'mensagem', }).setDescription('Enter your message!').setDescriptionLocalizations({ "pt-BR": 'Escreve a tua mensagem!', }).setRequired(true))
+		.addAttachmentOption((option) => option.setName('attachment').setNameLocalizations({ "pt-BR": 'ficheiro', }).setDescription('Add an attachment')).setDescriptionLocalizations({ "pt-BR": 'Adiciona um ficheiro!', }),
 };

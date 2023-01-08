@@ -274,9 +274,9 @@ module.exports =
 	},
 
 	data: new SlashCommandBuilder()
-		.setName('echo')
-		.setDescription('Echo a message!')
-		.addChannelOption((option) => option.setName('channel').setDescription('Select a channel').setRequired(true))
-		.addStringOption((option) => option.setName('message').setDescription('Enter your message!').setRequired(true))
-		.addAttachmentOption((option) => option.setName('attachment').setDescription('Add an attachment')),
+		.setName('echo').setNameLocalizations({ "pt-BR": 'eco', })
+		.setDescription('Echo a message!').setDescriptionLocalizations({ "pt-BR": 'Faz o bot mandar uma mensagem por eco!', })
+		.addChannelOption((option) => option.setName('channel').setNameLocalizations({ "pt-BR": 'canal', }).setDescription('Select a channel').setDescriptionLocalizations({ "pt-BR": 'Seleciona um canal', }).setRequired(true))
+		.addStringOption((option) => option.setName('message').setNameLocalizations({ "pt-BR": 'mensagem', }).setDescription('Enter your message!').setDescriptionLocalizations({ "pt-BR": 'Escreve a tua mensagem!', }).setRequired(true))
+		.addAttachmentOption((option) => option.setName('attachment').setNameLocalizations({ "pt-BR": 'ficheiro', }).setDescription('Add an attachment')).setDescriptionLocalizations({ "pt-BR": 'Adiciona um ficheiro', }),
 };

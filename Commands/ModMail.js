@@ -176,14 +176,20 @@ module.exports =
 	}
 
 	else {
-		await interaction.reply({ ephemeral: true, content: `This command is disabled on this server! Ask <@${224258146078556160}> (AlexMango#6583) to add it here!` });
+
+		const locales = {
+			"pt-BR": `O comando ainda não está disponível neste server! Pede ao <@${224258146078556160}> (AlexMango#6583) para adicioná-lo aqui!`,
+		};
+
+
+		await interaction.reply({ ephemeral: true, content: locales[interaction.locale] ?? `This command is disabled on this server! Ask <@${224258146078556160}> (AlexMango#6583) to add it here!` });
 	}
 
 	},
 
 	data: new SlashCommandBuilder()
-		.setName('modmail')
-		.setDescription('Send a message to the mods!')
-		.addStringOption((option) => option.setName('message').setDescription('Enter your message!').setRequired(true))
-		.addAttachmentOption((option) => option.setName('attachment').setDescription('Add an attachment')),
+		.setName('modmail').setNameLocalizations({ "pt-BR": 'correioparamods', })
+		.setDescription('Send a message to the mods!').setDescriptionLocalizations({ "pt-BR": 'Manda uma mensagem aos moderadores!', })
+		.addStringOption((option) => option.setName('message').setNameLocalizations({ "pt-BR": 'mensagem', }).setDescription('Enter your message!').setRequired(true).setDescriptionLocalizations({ "pt-BR": 'Escreve a tua mensagem!', }))
+		.addAttachmentOption((option) => option.setName('attachment').setNameLocalizations({ "pt-BR": 'ficheiro', }).setDescription('Add an attachment').setDescriptionLocalizations({ "pt-BR": 'Adiciona um ficheiro', })),
 };
