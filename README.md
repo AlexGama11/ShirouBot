@@ -1,8 +1,8 @@
-﻿## Rei Discord Bot!
+﻿## Shirou Discord Bot!
 
 Remaking the discord bot I made in 2020!
 
-If you wish to use the code just remember to switch the token on the config file.
+If you wish to use the code just remember to switch put your token on your env file.
 
 To use it you also need to Open node.js and go to the bot directory and type:
 npm install discord.js --save
