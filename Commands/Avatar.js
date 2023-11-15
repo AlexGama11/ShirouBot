@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
-const { Client, Collection, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const { EmbedBuilder } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 
 module.exports =
 {
@@ -24,7 +24,7 @@ module.exports =
 				"pt-BR": `${interaction.user.username} pediu o avatar de ${user.username}`,
 			};
 	
-			const avatarEmbed = new MessageEmbed()
+			const avatarEmbed = new EmbedBuilder()
 				.setColor('#00cc00')
 				.setTitle(titleLocales[interaction.locale] ?? `${user.username}'s avatar`)
 				.setDescription(descriptionLocales[interaction.locale] ?? 'Their avatar is shown here')
@@ -50,7 +50,7 @@ module.exports =
 				"pt-BR": `${interaction.user.username} pediu o seu avatar`,
 			};
 
-			const avatarEmbed = new MessageEmbed()
+			const avatarEmbed = new EmbedBuilder()
 				.setColor('#00cc00')
 				.setTitle(titleLocales[interaction.locale] ?? `${interaction.user.username}'s avatar`)
 				.setDescription(descriptionLocales[interaction.locale] ?? 'Your avatar is shown here')

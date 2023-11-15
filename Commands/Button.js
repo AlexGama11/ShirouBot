@@ -1,7 +1,7 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, Interaction, GuildMemberRoleManager, MessageActionRow, MessageButton } = require('discord.js');
-const { Client, Collection, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const { ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, Interaction, GuildMemberRoleManager, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const wait = require('util').promisify(setTimeout);
 
 module.exports =
@@ -16,7 +16,7 @@ module.exports =
 			const guildMember = interaction.member;
 			const avatar = interaction.user.displayAvatarURL({ dynamic: true, size: 1024 });
 	
-			const buttonEmbed = new MessageEmbed()
+			const buttonEmbed = new EmbedBuilder()
 				.setColor('#8e5539')
 				.setTitle('Button')
 				.setDescription('Button')
@@ -27,26 +27,26 @@ module.exports =
 			// ================================================================================================================================//
 	
 	
-			const button = new MessageActionRow()
+			const button = new ActionRowBuilder()
 				.addComponents(
-					new MessageButton()
+					new ButtonBuilder()
 						.setCustomId('honk')
 						.setLabel('Honk')
-						.setStyle('PRIMARY'),
+						.setStyle(ButtonStyle.Primary),
 				)
 	
 				.addComponents(
-					new MessageButton()
+					new ButtonBuilder()
 					.setCustomId('kanye')
 					.setLabel('Kanye')
-					.setStyle('PRIMARY'),
+					.setStyle(ButtonStyle.Primary),
 				)
 				
 				.addComponents(
-					new MessageButton()
+					new ButtonBuilder()
 						.setCustomId('lovelive')
 						.setLabel('LoveLive')
-						.setStyle('PRIMARY'),
+						.setStyle(ButtonStyle.Primary),
 				);
 	
 			await interaction.reply({ ephemeral: false, embeds: [buttonEmbed], components: [button] });
@@ -191,7 +191,7 @@ module.exports =
 			const guildMember = interaction.member;
 			const avatar = interaction.user.displayAvatarURL({ dynamic: true, size: 1024 });
 	
-			const buttonEmbed = new MessageEmbed()
+			const buttonEmbed = new EmbedBuilder()
 				.setColor('#8e5539')
 				.setTitle('Button')
 				.setDescription('Button')
@@ -202,26 +202,26 @@ module.exports =
 			// ================================================================================================================================//
 	
 	
-			const button = new MessageActionRow()
+			const button = new ActionRowBuilder()
 				.addComponents(
-					new MessageButton()
+					new ButtonBuilder()
 						.setCustomId('honk')
 						.setLabel('Honk')
-						.setStyle('PRIMARY'),
+						.setStyle(ButtonStyle.Primary),
 				)
 	
 				.addComponents(
-					new MessageButton()
+					new ButtonBuilder()
 					.setCustomId('kanye')
 					.setLabel('Kanye')
-					.setStyle('PRIMARY'),
+					.setStyle(ButtonStyle.Primary),
 				)
 				
 				.addComponents(
-					new MessageButton()
+					new ButtonBuilder()
 						.setCustomId('lovelive')
 						.setLabel('LoveLive')
-						.setStyle('PRIMARY'),
+						.setStyle(ButtonStyle.Primary),
 				);
 	
 			await interaction.reply({ ephemeral: false, embeds: [buttonEmbed], components: [button] });

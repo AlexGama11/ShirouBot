@@ -1,8 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
-const { Client, Collection, Intents, TextChannel } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const wait = require('util').promisify(setTimeout);
+const { SlashCommandBuilder, EmbedBuilder, Client, Collection, GatewayIntentBits, TextChannel } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const dotenv = require('dotenv').config();
 
 module.exports =
@@ -20,7 +17,7 @@ module.exports =
 		}
 
 		else {
-			const avatarEmbed = new MessageEmbed()
+			const avatarEmbed = new EmbedBuilder()
 				.setColor('#6600ff')
 				.setTitle('ModMail')
 				.setDescription('Thank your for your message, the staff will review it shortly!')
@@ -54,7 +51,7 @@ module.exports =
 		}
 
 		else {
-			const avatarEmbed = new MessageEmbed()
+			const avatarEmbed = new EmbedBuilder()
 				.setColor('#6600ff')
 				.setTitle('ModMail')
 				.setDescription('Thank your for your message, the staff will review it shortly!')
@@ -87,7 +84,7 @@ module.exports =
 		}
 
 		else {
-			const avatarEmbed = new MessageEmbed()
+			const avatarEmbed = new EmbedBuilder()
 				.setColor('#6600ff')
 				.setTitle('ModMail')
 				.setDescription('Thank your for your message, the staff will review it shortly!')
@@ -120,7 +117,7 @@ module.exports =
 		}
 
 		else {
-			const avatarEmbed = new MessageEmbed()
+			const avatarEmbed = new EmbedBuilder()
 				.setColor('#6600ff')
 				.setTitle('ModMail')
 				.setDescription('Thank your for your message, the staff will review it shortly!')
@@ -153,7 +150,7 @@ module.exports =
 		}
 
 		else {
-			const avatarEmbed = new MessageEmbed()
+			const avatarEmbed = new EmbedBuilder()
 				.setColor('#6600ff')
 				.setTitle('ModMail')
 				.setDescription('Thank your for your message, the staff will review it shortly!')

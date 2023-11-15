@@ -1,9 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { isInteractionButton } = require('discord-api-types/utils/v9');
-const { MessageEmbed } = require('discord.js');
-const { Client, Collection, Intents, TextChannel } = require('discord.js');
-const client = new Client({ partials: ['CHANNEL'], intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES] });
-const wait = require('util').promisify(setTimeout);
+const { SlashCommandBuilder, EmbedBuilder, Client, Collection, GatewayIntentBits, TextChannel } = require('discord.js');
+const client = new Client({ partials: ['CHANNEL'], intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages] });
 
 module.exports =
 {
@@ -13,6 +9,7 @@ module.exports =
 		const alex = await interaction.client.users.fetch('224258146078556160');
 		const attachment = interaction.options.getAttachment('attachment');
 		const avatar = interaction.member.displayAvatarURL({ dynamic: true, size: 1024 });
+		const guild = interaction.guild.name
 
 		const titleLocales = {
 			"pt-BR": 'Sugestão',
@@ -26,7 +23,7 @@ module.exports =
 			"pt-BR": `${interaction.user.username} mandou uma sugestão`,
 		};
 
-			const avatarEmbed = new MessageEmbed()
+			const avatarEmbed = new EmbedBuilder()
 				.setColor('#6600ff')
 				.setTitle(titleLocales[interaction.locale] ?? 'Suggestion')
 				.setDescription(descriptionLocales[interaction.locale] ?? 'Thank your for your suggestion, Alex will review it when he can!')
@@ -35,11 +32,12 @@ module.exports =
 				.setTimestamp();
 
 			if (!attachment) {
-				await alex.send(`${interaction.user.username} sent a suggestion: ${string}`);
+				await alex.send(`${interaction.user.username} from ${guild} sent a suggestion: ${string}`);
+				console.log(attachment);
 			}
 
 			else {
-				await alex.send(`${interaction.user.username} sent a suggestion: ${string} ` + attachment.attachment);
+				await alex.send(`${interaction.user.username} from ${guild} sent a suggestion: ${string} ` + attachment.attachment);
 
 				console.log(attachment.url);
 			}

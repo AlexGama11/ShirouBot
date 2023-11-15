@@ -1,7 +1,8 @@
-﻿const fs = require('fs');
-const { Client, Collection, Intents } = require('discord.js');
+﻿const { InteractionType } = require('discord.js');
+const fs = require('fs');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const dotenv = require('dotenv').config();
-const client = new Client({ partials: ['CHANNEL'], intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const { ActivityType } = require('discord.js');
 
 client.commands = new Collection();
@@ -15,7 +16,7 @@ for (const file of commandFiles) {
 
 client.on('ready', () => {
 	console.log('Let\'s go, Tohsaka!');
-	client.user.setActivity(`people in ${client.guilds.cache.size} servers`, { type: 'LISTENING' });
+	client.user.setActivity(`people in ${client.guilds.cache.size} servers`, { type: ActivityType.Listening });
 	client.user.setStatus('online');
 });
 
@@ -189,9 +190,9 @@ client.on("messageCreate", async (message) => {
 
 
 client.on('interactionCreate', async (interaction) => {
-	if (!interaction.isCommand() && !interaction.isButton()) return;
+	if (!interaction.type === InteractionType.ApplicationCommand && !interaction.isButton()) return;
 
-	if (interaction.isCommand()) {
+	if (interaction.type === InteractionType.ApplicationCommand) {
 		const command = client.commands.get(interaction.commandName.toLocaleLowerCase());
 
 		if (!command) {

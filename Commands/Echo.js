@@ -1,9 +1,5 @@
-/* eslint-disable no-unused-vars */
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
-const { Client, Collection, Intents, TextChannel } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const wait = require('util').promisify(setTimeout);
+const { SlashCommandBuilder, EmbedBuilder, Client, Collection, GatewayIntentBits, TextChannel } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 
 module.exports =
 {
@@ -31,12 +27,12 @@ module.exports =
 				}
 	
 				else {
-					const avatarEmbed = new MessageEmbed()
+					const avatarEmbed = new EmbedBuilder()
 						.setColor('#6600ff')
 						.setTitle('Echo')
 						.setDescription('Thank your for your message!')
 						.setThumbnail('https://cdn.discordapp.com/attachments/736236169293070396/975810146112524388/unknown.png?size=4096')
-						.setFooter(`${interaction.user.username} sent a message`, avatar, true)
+						.setFooter({text: `${interaction.user.username} sent a message`, iconURL: avatar})
 						.setTimestamp();
 	
 					if (!attachment) {
@@ -91,12 +87,12 @@ module.exports =
 				}
 	
 				else {
-					const avatarEmbed = new MessageEmbed()
+					const avatarEmbed = new EmbedBuilder()
 						.setColor('#6600ff')
 						.setTitle('Echo')
 						.setDescription('Thank your for your message!')
 						.setThumbnail('https://cdn.discordapp.com/attachments/736236169293070396/975810146112524388/unknown.png?size=4096')
-						.setFooter(`${interaction.user.username} sent a message`, avatar, true)
+						.setFooter({text: `${interaction.user.username} sent a message`, iconURL: avatar})
 						.setTimestamp();
 	
 					if (!attachment) {
@@ -142,12 +138,12 @@ module.exports =
 			}
 
 			else {
-				const avatarEmbed = new MessageEmbed()
+				const avatarEmbed = new EmbedBuilder()
 					.setColor('#6600ff')
 					.setTitle('Echo')
 					.setDescription('Thank your for your message!')
 					.setThumbnail('https://cdn.discordapp.com/attachments/736236169293070396/975810146112524388/unknown.png?size=4096')
-					.setFooter(`${interaction.user.username} sent a message`, avatar, true)
+					.setFooter({text: `${interaction.user.username} sent a message`, iconURL: avatar})
 					.setTimestamp();
 
 				if (!attachment) {
@@ -194,12 +190,12 @@ module.exports =
 			}
 
 			else {
-				const avatarEmbed = new MessageEmbed()
+				const avatarEmbed = new EmbedBuilder()
 					.setColor('#6600ff')
 					.setTitle('Echo')
 					.setDescription('Thank your for your message!')
 					.setThumbnail('https://cdn.discordapp.com/attachments/736236169293070396/975810146112524388/unknown.png?size=4096')
-					.setFooter(`${interaction.user.username} sent a message`, avatar, true)
+					.setFooter({text: `${interaction.user.username} sent a message`, iconURL: avatar})
 					.setTimestamp();
 
 				if (!attachment) {
@@ -245,12 +241,12 @@ module.exports =
 			}
 
 			else {
-				const avatarEmbed = new MessageEmbed()
+				const avatarEmbed = new EmbedBuilder()
 					.setColor('#6600ff')
 					.setTitle('Echo')
 					.setDescription('Thank your for your message!')
 					.setThumbnail('https://cdn.discordapp.com/attachments/736236169293070396/975810146112524388/unknown.png?size=4096')
-					.setFooter(`${interaction.user.username} sent a message`, avatar, true)
+					.setFooter({text: `${interaction.user.username} sent a message`, iconURL: avatar})
 					.setTimestamp();
 
 				if (!attachment) {

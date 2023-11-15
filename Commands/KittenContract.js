@@ -1,7 +1,7 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, Interaction, GuildMemberRoleManager, MessageActionRow, MessageButton } = require('discord.js');
-const { Client, Collection, Intents, TextChannel } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const { ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, Interaction, GuildMemberRoleManager, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, TextChannel } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const wait = require('util').promisify(setTimeout);
 const fs = require('fs');
 
@@ -80,20 +80,20 @@ module.exports =
 			}
 	
 			else {
-				const sign = new MessageActionRow()
+				const sign = new ActionRowBuilder()
 					.addComponents(
-						new MessageButton()
+						new ButtonBuilder()
 							.setCustomId('sign')
 							.setLabel('Sign')
-							.setStyle('SUCCESS'),
+							.setStyle(ButtonStyle.Success),
 					);
 	
-				const cancel = new MessageActionRow()
+				const cancel = new ActionRowBuilder()
 					.addComponents(
-						new MessageButton()
+						new ButtonBuilder()
 							.setCustomId('cancel')
 							.setLabel('Cancel')
-							.setStyle('DANGER'),
+							.setStyle(ButtonStyle.Danger),
 					);
 	
 				await interaction.reply({ ephemeral: false, content: contract, components: [sign, cancel] });

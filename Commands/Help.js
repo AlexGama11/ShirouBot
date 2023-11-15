@@ -1,8 +1,6 @@
 const fs = require('fs');
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
-const { Client, Collection, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const { SlashCommandBuilder, EmbedBuilder, Client, Collection, GatewayIntentBits } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 
 module.exports =
 {
@@ -23,7 +21,7 @@ module.exports =
 			"pt-BR": `${interaction.user.username} pediu a lista de todos os comandos`,
 		};
 
-		const helpEmbed = new MessageEmbed()
+		const helpEmbed = new EmbedBuilder()
 			.setColor('#73c0f9')
 			.setTitle(titleLocales[interaction.locale] ?? 'Help Command')
 			.setThumbnail('https://cdn.discordapp.com/attachments/736236169293070396/975810146112524388/unknown.png?size=4096')
@@ -156,7 +154,7 @@ module.exports =
 			"pt-BR": `Aqui está a lista de todos os comandos que o Shirou pode fazer!`,
 		};
 
-		helpEmbed.addField( str, commandLocales[interaction.locale] ?? 'Here\'s the list of all the commands Shirou can do!', true);
+		helpEmbed.addFields( str, commandLocales[interaction.locale] ?? 'Here\'s the list of all the commands Shirou can do!', true);
 
 		await interaction.reply({ embeds: [helpEmbed] });
 		//console.log(interaction.guild.id);
